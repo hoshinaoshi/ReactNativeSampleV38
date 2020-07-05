@@ -1,23 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Button } from 'react-native';
+import 'react-native-gesture-handler';
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from '@react-navigation/native';
+const Stack = createStackNavigator();
 
-export default class App extends React.Component {
-  render(){
+class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: "一覧",
+  };
+  render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View>
-    )
+      <Button
+        title="詳細画面へ"
+        onPress={() => this.props.navigation.navigate("Detail")}
+      />
+    );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+class DetailScreen extends React.Component {
+  static navigationOptions = {
+    title: "詳細",
+  };
+  render() {
+    return (
+      <Button
+        title="一覧画面へ"
+        onPress={() => this.props.navigation.goBack()}
+      />
+    );
+  }
+}
+export default class App extends React.Component {
+  render(){
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Detail" component={DetailScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    )
+  }
+}
