@@ -15,7 +15,7 @@ export default class App extends React.Component {
     return (
       <View style={{flex: 1, justifyContent: "center"}}>
         <Button
-          title="Linkingコンポーネントで電話アプリを開く"
+          title="LinkingコンポーネントでSMSアプリを開く"
           onPress={this._handleOpenWithLinking}
         />
         <Button
