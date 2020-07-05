@@ -1,23 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Button } from 'react-native';
+import * as Linking from 'expo-linking';
+import * as WebBrowser from 'expo-web-browser';
 
 export default class App extends React.Component {
-  render(){
+  _handleOpenWithLinking = () => {
+    Linking.openURL("sms://+123456789");
+  }
+
+  _handleOpenWithWebBrowser = () => {
+    WebBrowser.openBrowserAsync('https://expo.io');
+  }
+  render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <StatusBar style="auto" />
+      <View style={{flex: 1, justifyContent: "center"}}>
+        <Button
+          title="Linkingコンポーネントで電話アプリを開く"
+          onPress={this._handleOpenWithLinking}
+        />
+        <Button
+          title="WebBrowserコンポーネントでWebサイトを開く"
+          onPress={this._handleOpenWithWebBrowser}
+        />
       </View>
-    )
+    );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
