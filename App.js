@@ -1,15 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Notifications } from 'expo';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 
 export default class App extends React.Component {
-  render(){
+  constructor(props) {
+    super(props);
+    this.state = {token: ""};
+  }
+  async componentDidMount(){
+    let token;
+    try {
+      if (Constants.isDevice) {
+        const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        if (status === 'granted') {
+          token = await Notifications.getExpoPushTokenAsync();
+        }
+      }
+    } catch (error) {
+      Alert.alert("Error")
+    }
+    this.setState({token: token})
+    // 通常はこの後にトークンをバックエンドに渡します。
+  }
+
+  render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <StatusBar style="auto" />
+        <Text selectable={true}>{this.state.token}</Text>
       </View>
-    )
+    );
   }
 }
 
