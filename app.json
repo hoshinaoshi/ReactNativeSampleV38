@@ -17,10 +17,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mypackage.coolapp",
+      "googleServicesFile": "./GoogleService-Info.plist"
+    },
+    "android": {
+      "package": "com.mypackage.coolapp",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "config": {
+        "firebase": {
+          "appId": "xxxxxxxxxxxxx:web:xxxxxxxxxxxxxxxx",
+          "apiKey": "AIzaXXXXXXXX-xxxxxxxxxxxxxxxxxxx",
+          "measurementId": "G-XXXXXXXXXXXX"
+        }
+      }
     }
   }
 }
